@@ -40,14 +40,16 @@ function turnIntoUrl(value, index) {
       url: endpoint
     })
     .then(function (response) {
-      let result = response.data.query.pages;
-      result = Object.keys(result).map(i => result[i])
-      let button = document.createElement('a')
-      button.classList.add('url-button')
-      button.innerHTML = 'Смотреть в источнике'
-      button.setAttribute('href', result[0].fullurl);
-      button.setAttribute('target', '_blank');
-      document.querySelector('.result-item-' + index).appendChild(button)
+      let result = response.data.query.pages ? response.data.query.pages : '';
+      if (result) {
+        result = Object.keys(result).map(i => result[i])
+        let button = document.createElement('a')
+        button.classList.add('url-button')
+        button.innerHTML = 'Смотреть в источнике'
+        button.setAttribute('href', result[0].fullurl);
+        button.setAttribute('target', '_blank');
+        document.querySelector('.result-item-' + index).appendChild(button)
+      }
     });
 }
 
